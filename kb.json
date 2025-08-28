@@ -1,0 +1,146 @@
+[
+  {
+    "category": "AI Advanced Concepts",
+    "entries": [
+      {
+        "q": "What is attention in transformers?",
+        "a": "Attention lets a model weigh relationships between tokens. Self-attention relates each token to every other token, enabling parallel sequence processing and long-range dependency modeling."
+      },
+      {
+        "q": "Explain embeddings vs parameters.",
+        "a": "Embeddings are vector representations of discrete tokens/items; parameters are all trainable weights in the model (including embedding matrices and layer weights)."
+      },
+      {
+        "q": "Define positional encoding and why it exists.",
+        "a": "Transformers are permutation-invariant by default. Positional encodings inject order information so the model can reason about token positions."
+      },
+      {
+        "q": "What is RLHF and why use it?",
+        "a": "Reinforcement Learning from Human Feedback aligns outputs with human preferences. A reward model trained on human rankings guides policy optimization."
+      },
+      {
+        "q": "What is spec decoding / constrained decoding?",
+        "a": "Decoding with constraints (schemas, regex, grammars) to ensure outputs follow a structure or format, improving reliability for tools and APIs."
+      },
+      {
+        "q": "Explain zero-shot, one-shot, few-shot with failure modes.",
+        "a": "Zero-shot: no examples\u2014risks misinterpretation on niche tasks. One-shot: one example\u2014risk of overfitting the single pattern. Few-shot: small set\u2014better pattern induction; ensure coverage and diversity."
+      },
+      {
+        "q": "What is a vector database and why is it used?",
+        "a": "A vector DB stores embeddings for similarity search (ANN). Used in RAG for retrieving semantically related context from corpora."
+      },
+      {
+        "q": "What is retrieval-augmented generation (RAG)?",
+        "a": "Generate with grounded documents retrieved via semantic search to improve faithfulness and reduce hallucinations."
+      },
+      {
+        "q": "What is stratified sampling in dataset splitting?",
+        "a": "Preserves label distribution across train/val/test to prevent imbalance-induced bias and unstable metrics."
+      },
+      {
+        "q": "Contrast quantization and distillation for model efficiency.",
+        "a": "Quantization reduces numeric precision (e.g., FP16\u2192INT8) to save memory/latency; distillation trains a smaller student to mimic a larger teacher."
+      }
+    ]
+  },
+  {
+    "category": "DevOps Advanced Concepts",
+    "entries": [
+      {
+        "q": "Service mesh vs API gateway.",
+        "a": "API gateway handles north-south traffic (authn/z, rate limits). Service mesh handles east-west (mTLS, retries, traffic shaping, observability). Often both are used."
+      },
+      {
+        "q": "mTLS and short-lived certs.",
+        "a": "Mutual auth via client/server certs. Short-lived certs lower blast radius and simplify rotation since revocation lists become less critical."
+      },
+      {
+        "q": "Cell-based architecture vs mesh.",
+        "a": "Cells are self-contained stacks for blast-radius control. Mesh provides comms policy inside/between cells. Combine: mesh-per-cell + cell-aware routing."
+      },
+      {
+        "q": "NAT Gateway vs Internet Gateway.",
+        "a": "IGW provides bidirectional internet for public subnets. NAT GW enables egress-only for private subnets so instances aren't publicly addressable."
+      },
+      {
+        "q": "Bastion host vs NAT GW.",
+        "a": "Bastion = admin access entry point (SSH/RDP). NAT GW = outbound egress for private resources; they solve different problems."
+      },
+      {
+        "q": "HPA for CPU vs GPU workloads.",
+        "a": "CPU HPA often uses CPU utilization. GPU workloads need custom metrics (inference queue depth, latency, VRAM usage)."
+      },
+      {
+        "q": "Blue/Green vs Canary vs A/B.",
+        "a": "Blue/Green swaps entire environment. Canary shifts small traffic percentage. A/B tests variants concurrently for experiments."
+      },
+      {
+        "q": "Istio traffic shifting example.",
+        "a": "VirtualService routes v1=90%, v2=10%, with outlier detection and timeout/retry policies."
+      },
+      {
+        "q": "Trust chain in TLS.",
+        "a": "Leaf cert \u2194 intermediate CAs \u2194 root CA. Clients validate signature chain to a trusted root."
+      },
+      {
+        "q": "Routing vs switching.",
+        "a": "Switching (L2) forwards frames within a broadcast domain; routing (L3) forwards packets between networks with separate broadcast domains."
+      }
+    ]
+  },
+  {
+    "category": "AI + DevOps Integration",
+    "entries": [
+      {
+        "q": "Observability in AI inference with Snowflake.",
+        "a": "Store logs (ts, route, latency, status). Build weekly baselines and compare slopes; alert on >50% failure for any route over 10-minute windows."
+      },
+      {
+        "q": "CI/CD for ML models.",
+        "a": "Version datasets/models; automate training\u2192eval\u2192registry\u2192deployment; use feature flags or traffic splitting to roll out."
+      },
+      {
+        "q": "Prometheus metrics for drift.",
+        "a": "Export metrics: confidence_drift, input_shift_psi, latency, error_rate. Grafana visualizes; Alertmanager pages on thresholds."
+      },
+      {
+        "q": "Scaling inference on K8s.",
+        "a": "Autoscale based on QPS, latency, or queue depth via KEDA/custom metrics; use node pools with GPUs; optimize cold start."
+      },
+      {
+        "q": "Safe rollbacks for models.",
+        "a": "Keep previous model in registry, enable rapid rollback; preserve feature pipelines; write idempotent migrations."
+      },
+      {
+        "q": "Guardrails and schema-constrained output.",
+        "a": "Use JSON schema or function calling spec to force structure; validate before side effects."
+      },
+      {
+        "q": "Data governance for RAG.",
+        "a": "P0: access control, PII redaction, doc provenance, chunk attribution in answers."
+      }
+    ]
+  },
+  {
+    "category": "Hands-On Challenges",
+    "entries": [
+      {
+        "challenge": "Few-shot demo (mTLS)",
+        "task": "Provide 2 poor and 2 strong explanations of mTLS; run with and without few-shot exemplars; observe improvement."
+      },
+      {
+        "challenge": "Context window stress",
+        "task": "Ask a multi-part question (NAT vs IGW, Bastion vs NAT, mesh vs gateway, trust chain). Trim the KB and observe answer degradation."
+      },
+      {
+        "challenge": "Custom KB expansion",
+        "task": "Add entries (e.g., PSI for drift, vector DB tradeoffs) and re-run retrieval."
+      },
+      {
+        "challenge": "Incident drill: model drift",
+        "task": "Given rising 5xx and lower confidence, outline RC steps with metrics to gather and rollback plan."
+      }
+    ]
+  }
+]

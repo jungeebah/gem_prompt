@@ -1,0 +1,4 @@
+{"query": "Give a numbered runbook for investigating model drift with Prometheus+Grafana.", "expected_focus": ["Prometheus metrics", "confidence drift", "Alertmanager", "rollback plan"]}
+{"query": "Compare canary vs blue/green for rolling out an LLM.", "expected_focus": ["traffic splitting", "rollback speed", "experiment risk"]}
+{"query": "Explain trust chain and why short-lived certs help.", "expected_focus": ["root/intermediate/leaf", "revocation vs rotation"]}
+{"query": "Design HPA signals for GPU inference.", "expected_focus": ["queue depth", "latency", "VRAM usage"]}
